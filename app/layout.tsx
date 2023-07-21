@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Nav from "@components/Nav";
 import "@styles/globals.css";
+import Provider from "@components/Provider";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -17,14 +18,16 @@ const RootLayout: React.FC<RootLayoutProps> = ({
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-        </div>
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
 
-        <main className="app">
-          <Nav />
-          {children}
-        </main>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );
