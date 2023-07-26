@@ -1,10 +1,10 @@
-import { Post } from "@types";
+import { FormEventHandler } from "react";
+import { CreatePostType, FormType, PostType } from "@types";
 import Link from "next/link";
-import React, { FormEventHandler } from "react";
 
 type FormProps = {
-  type: string;
-  post: Post;
+  type: FormType;
+  post: PostType | CreatePostType;
   setPost: Function;
   isSubmitting: boolean;
   handleSubmit: FormEventHandler<HTMLFormElement>;

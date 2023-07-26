@@ -1,12 +1,12 @@
 "use client";
-import React, { ChangeEvent } from "react";
+
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
-import { Post } from "@types";
+import { PostType } from "@types";
 
 type PromptCardListProps = {
-  data: any;
-  handleTagClick: any;
+  data: PostType[];
+  handleTagClick: Function;
 };
 
 const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
@@ -25,7 +25,7 @@ const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
 
 type FeedProps = {};
 
-const Feed = (props: FeedProps) => {
+const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
 

@@ -1,19 +1,17 @@
 "use client";
-import { FormEvent, FormEventHandler, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
-import { Post } from "@types";
+import { CreatePostType } from "@types";
 
-type CreatePromptProps = {};
-
-const CreatePrompt = ({}: CreatePromptProps) => {
+const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState<Post>({
+  const [post, setPost] = useState<CreatePostType>({
     prompt: "",
     tag: "",
   });
@@ -27,19 +25,18 @@ const CreatePrompt = ({}: CreatePromptProps) => {
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,
-          // @ts-ignore
           userId: session?.user?.id,
           tag: post.tag,
         }),
       });
 
       if (response.ok) {
-        router.push('/');
+        router.push("/");
       }
     } catch (error) {
-        console.log(error)
+      console.log(error);
     } finally {
-        setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   };
 
