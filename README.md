@@ -7,6 +7,8 @@
 
 Promptopia is an AI-powered prompting tool that allows users to discover, create, and share useful prompts. This application was created as a learning project to explore and gain experience in Next.js 13, and further my expertise in TypeScript, Tailwind CSS, and MongoDB.
 
+<img width="1041" alt="image" src="https://github.com/jmulq/promptopia-nextjs/assets/38944661/c927bf26-3fb6-4aa1-8c7f-829adfd85e95">
+
 
 ## Local Setup
 
