@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import PromptCard from "./PromptCard";
 import { PostType } from "@types";
 
@@ -27,7 +27,8 @@ type FeedProps = {};
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,7 +40,26 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const handleSearchChange = (e: any) => {};
+  useEffect(() => {
+    const regex = new RegExp(searchText, "i");
+
+    const filteredPosts = posts.filter(
+      (post) =>
+        regex.test(post.prompt) ||
+        regex.test(post.tag) ||
+        regex.test(post?.creator?.name ?? "")
+    );
+    setFilteredPosts(filteredPosts);
+  }, [searchText, posts]);
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchText(e.currentTarget.value);
+  };
+
+  const handleTagClick = (tag: string) => {
+    setSearchText(tag);
+  };
 
   return (
     <section className="feed">
@@ -54,7 +74,10 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList
+        data={searchText.length > 0 ? filteredPosts : posts}
+        handleTagClick={handleTagClick}
+      />
     </section>
   );
 };

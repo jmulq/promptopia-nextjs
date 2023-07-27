@@ -5,8 +5,8 @@ type ProfileProps = {
   name: string;
   desc: string;
   data: PostType[];
-  handleEdit: (post: PostType) => any;
-  handleDelete: (post: PostType) => any;
+  handleEdit?: (post: PostType) => any;
+  handleDelete?: (post: PostType) => any;
 };
 
 const Profile = ({
@@ -18,7 +18,7 @@ const Profile = ({
 }: ProfileProps) => (
   <section className="w-full">
     <h1 className="head_text text-left">
-      <span className="blue_gradient">{name} Profile</span>
+      <span className="blue_gradient">{name}</span>
     </h1>
     <p className="desc text-left">{desc}</p>
 
